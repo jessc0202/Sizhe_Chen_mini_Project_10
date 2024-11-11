@@ -16,19 +16,22 @@ from mylib.lib import (
 # Initialize Spark session
 spark = SparkSession.builder.appName("AlcoholConsumptionAnalysis").getOrCreate()
 
+
 def main():
     # Load dataset
-    drink_csv = ("https://raw.githubusercontent.com/fivethirtyeight/data/"
-    "master/alcohol-consumption/drinks.csv")
+    drink_csv = (
+        "https://raw.githubusercontent.com/fivethirtyeight/data/"
+        "master/alcohol-consumption/drinks.csv"
+    )
     drink_df = load_and_preprocess(drink_csv)
 
     # Basic Data Inspection
     drink_df.printSchema()  # Prints schema instead of .info()
     print("Number of rows:", drink_df.count())
     print("Number of missing values:")
-    drink_df.select([count(when(col(c).
-                                isNull(), c)).alias(c) for c in 
-                                drink_df.columns]).show()
+    drink_df.select(
+        [count(when(col(c).isNull(), c)).alias(c) for c in drink_df.columns]
+    ).show()
 
     # Basic Statistics
     basic_stats = calculate_basic_stats(drink_df)
@@ -51,25 +54,30 @@ def main():
     drink_df = classify_and_count_categories(drink_df)
 
     # Identify and print countries with zero alcohol consumption
-    zero_consumption_countries = drink_df.filter(drink_df["total_alcohol"] 
-                                                 == 0).select("country", 
-                                                              "total_alcohol")
+    zero_consumption_countries = drink_df.filter(drink_df["total_alcohol"] == 0).select(
+        "country", "total_alcohol"
+    )
     print("Countries with Zero Alcohol Consumption:\n")
     zero_consumption_countries.show()
 
     # Visualize Alcohol Consumption by Category
     plot_category_counts(drink_df)
 
+
 def plot_category_counts(df):
     category_counts = df.groupBy("consumption_category").count().toPandas()
     plt.figure(figsize=(8, 6))
-    sns.barplot(x=category_counts["consumption_category"], 
-                y=category_counts["count"], palette="viridis")
+    sns.barplot(
+        x=category_counts["consumption_category"],
+        y=category_counts["count"],
+        palette="viridis",
+    )
     plt.title("Number of Countries by Alcohol Consumption Category")
     plt.xlabel("Consumption Category")
     plt.ylabel("Number of Countries")
     plt.savefig("consumption_category.png", bbox_inches="tight")
     plt.close()
+
 
 def save_to_markdown(drink_csv):
     """Save summary report to markdown."""
@@ -131,8 +139,11 @@ def save_to_markdown(drink_csv):
 
     print("Summary report saved as 'alcohol_consumption_summary.md'")
 
+
 if __name__ == "__main__":
     main()
-    drink_csv = ("https://raw.githubusercontent.com/fivethirtyeight/" 
-                 "data/master/alcohol-consumption/drinks.csv")
+    drink_csv = (
+        "https://raw.githubusercontent.com/fivethirtyeight/"
+        "data/master/alcohol-consumption/drinks.csv"
+    )
     save_to_markdown(drink_csv)
