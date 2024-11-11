@@ -17,5 +17,5 @@ pyspark
 requests
 tabulate
 matplotlib
-
+seaborn
 
