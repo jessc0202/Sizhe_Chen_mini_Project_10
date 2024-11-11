@@ -23,12 +23,22 @@ jobs:
         run: make generate_and_push
       - name: deploy
         run: make deploy
-      - name: Push changes
+      - name: Check for changes
+        id: changes
+        run: |
+          git fetch
+          if [ -z "$(git diff origin/main)" ]; then
+            echo "No changes to push"
+            exit 0
+          fi
+      - name: Commit and Push changes
+        if: steps.changes.outputs.has_changes == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Add output log"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/jessc0202/Sizhe_Chen_mini_Project_10.git HEAD:main
+          git push origin main
+      
       
     
