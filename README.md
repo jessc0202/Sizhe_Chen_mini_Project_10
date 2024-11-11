@@ -1,37 +1,78 @@
-[![CI](https://github.com/nogibjj/python-ruff-template/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/python-ruff-template/actions/workflows/cicd.yml)
-## Template for Python projects with RUFF linter
+[![CI](https://github.com/jessc0202/Sizhe_Chen_mini_Project_10/actions/workflows/cicd.yml/badge.svg)](https://github.com/jessc0202/Sizhe_Chen_mini_Project_10/actions/workflows/cicd.yml)
+# Alcohol Consumption Analysis
 
-![1 15_rust_built_python_tools](https://github.com/nogibjj/python-ruff-template/assets/58792/db5f7bda-a977-4c67-acbe-a70fe034fbdf)
+This project analyzes alcohol consumption data by country, providing insights into the average consumption of different types of alcohol (beer, spirits, and wine) and the total consumption of pure alcohol. It uses PySpark for data processing and analysis, along with `matplotlib` and `seaborn` for visualizations.
 
+## Table of Contents
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Functions and Features](#functions-and-features)
+- [Testing](#testing)
+- [License](#license)
 
-1. First thing to do on launch is to open a new shell and verify virtualenv is sourced.
+## Installation
 
-Things included are:
+### Prerequisites
 
-* `Makefile`
+- Python 3.8+
+- [PySpark](https://spark.apache.org/docs/latest/api/python/)
+- `matplotlib`, `seaborn`, and other dependencies specified in `requirements.txt`
 
-* `Pytest`
+### Project Structure
+   ```bash
+   .
+├── Dockerfile
+├── LICENSE
+├── Makefile
+├── README.md
+├── __pycache__
+│   ├── main.cpython-312.pyc
+│   └── test_main.cpython-312-pytest-7.1.3.pyc
+├── alcohol_consumption_summary.md
+├── average_servings.png
+├── beer_distribution.png
+├── consumption_category.png
+├── data
+│   └── drinks.csv
+├── main.py
+├── mylib
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-312.pyc
+│   │   └── lib.cpython-312.pyc
+│   └── lib.py
+├── repeat.sh
+├── requirements.txt
+├── setup.sh
+├── spirit_distribution.png
+├── test_main.py
+├── top_countries.png
+├── total_alcohol_distribution.png
+└── wine_distribution.png
+   ```
 
-* `pandas`
+## Functions and Features
 
-* `Ruff`:  
+### Main Functions
 
-Run `make lint` which runs `ruff check`.  You can find out more info on [Ruff here](https://github.com/astral-sh/ruff).
+- **`load_and_preprocess`**: Loads and preprocesses the dataset by renaming columns for easier access.
+- **`calculate_basic_stats`**: Calculates basic descriptive statistics (mean, min, max, etc.).
+- **`get_top_countries_by_alcohol`**: Retrieves the top N countries by total alcohol consumption.
+- **`compute_correlation_matrix`**: Computes a correlation matrix for different types of alcohol consumption.
+- **`plot_average_servings`**: Plots the average servings of beer, spirits, and wine.
+- **`plot_top_countries`**: Visualizes the top countries by total alcohol consumption.
+- **`plot_servings_distributions`**: Plots the distribution of servings for each type of alcohol.
+- **`classify_and_count_categories`**: Classifies countries based on alcohol consumption and counts them by category.
 
-* `Dockerfile`
+### Visualizations
 
-* `GitHub copilot`
-
-* `jupyter` and `ipython` 
-
-* A base set of libraries for devops and web
-
-* `githubactions`
+- **Average servings** of different types of alcohol.
+- **Top 5 countries** by total alcohol consumption.
+- **Distribution of servings** for beer, spirits, wine, and total alcohol.
+- **Number of countries** by alcohol consumption category.
 
 ## References
-
-![1 1-function-essence-of-programming](https://github.com/nogibjj/python-ruff-template/assets/58792/f7f33cd3-cff5-4014-98ea-09b6a29c7557)
-
-
-
+1. https://github.com/nogibjj/python-ruff-template
+2. https://github.com/fivethirtyeight/data/tree/master/daily-show-guests
